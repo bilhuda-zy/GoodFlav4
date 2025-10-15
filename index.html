@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goodflav – Toko Online</title>
+
+  <!-- Font Gothic/Metal + Font Beranda (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=MedievalSharp&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Icon FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #111 0%, #000 60%, #0a0a0a 100%);
+      color: #fff;
+      font-family: 'MedievalSharp', cursive;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Efek glossy */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0.9) 40%, rgba(255,255,255,0.05) 100%);
+      mix-blend-mode: overlay;
+      opacity: 0.3;
+      z-index: -2;
+      animation: shimmer 10s ease-in-out infinite alternate;
+    }
+
+    /* Pola ular samar */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background-image: url('https://i.ibb.co/hg7MRx3/snake-pattern-bw.jpg');
+      background-size: cover;
+      background-repeat: repeat;
+      opacity: 0.07;
+      animation: moveSnake 40s linear infinite;
+      z-index: -3;
+    }
+
+    @keyframes shimmer {
+      0% { opacity: 0.25; }
+      50% { opacity: 0.4; }
+      100% { opacity: 0.25; }
+    }
+
+    @keyframes moveSnake {
+      0% { transform: translate(0, 0) scale(1.1); }
+      50% { transform: translate(-100px, -100px) scale(1.15); }
+      100% { transform: translate(0, 0) scale(1.1); }
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(20,20,20,0.6));
+      border-bottom: 1px solid #333;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 1.5s ease;
+      box-shadow: 0 4px 25px rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+      animation: headerShine 8s infinite linear;
+    }
+
+    @keyframes headerShine {
+      0% { left: -100%; }
+      50% { left: 100%; }
+      100% { left: 100%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      margin-bottom: 15px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      transition: 0.4s;
+    }
+
+    header img:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 0 35px rgba(255,255,255,0.6);
+    }
+
+    header h1 {
+      font-family: 'Metal Mania', cursive;
+      font-size: 60px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px #fff, 0 0 24px #777;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 12px 0;
+      border-bottom: 1px solid #333;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      font-family: 'Metal Mania', cursive;
+      letter-spacing: 2px;
+      backdrop-filter: blur(6px);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 20px;
+      text-transform: uppercase;
+      font-size: 14px;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ---------- BERANDA ---------- */
+    .beranda {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.8;
+      font-size: 15px;
+      color: #eaeaea;
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      padding: 60px 25px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 2s ease forwards;
+    }
+
+    .beranda h3 {
+      font-family: 'Metal Mania', cursive;
+      font-size: 26px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- PRODUK ---------- */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      padding: 50px 25px;
+      animation: fadeIn 2s ease;
+    }
+
+    .product {
+      background: linear-gradient(160deg, rgba(10,10,10,0.95), rgba(30,30,30,0.7));
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: 0.4s;
+      box-shadow: 0 0 15px rgba(255,255,255,0.05);
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+      animation: cardShine 12s infinite linear;
+    }
+
+    @keyframes cardShine {
+      0% { left: -150%; }
+      50% { left: 150%; }
+      100% { left: 150%; }
+    }
+
+    .product:hover {
+      transform: translateY(-8px);
+      border-color: #666;
+      box-shadow: 0 0 25px rgba(255,255,255,0.2);
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      transition: 0.3s;
+    }
+
+    .product img:hover {
+      transform: scale(1.05);
+    }
+
+    .product h3 {
+      font-family: 'Metal Mania', cursive;
+      font-size: 24px;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .price {
+      color: #ccc;
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .buy {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 1px solid #fff;
+      text-decoration: none;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 13px;
+      border-radius: 5px;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .buy:hover {
+      background-color: #fff;
+      color: #000;
+      box-shadow: 0 0 15px #fff;
+    }
+
+    /* ---------- KONTAK ---------- */
+    .contact {
+      text-align: center;
+      padding: 60px 20px;
+      background-color: rgba(10,10,10,0.8);
+      border-top: 1px solid #333;
+      animation: fadeIn 2s ease;
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
+    }
+
+    .contact h2 {
+      font-family: 'Metal Mania', cursive;
+      font-size: 36px;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .social {
+      color: #bbb;
+    }
+
+    .social a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 22px;
+      margin: 0 12px;
+      transition: 0.3s;
+      font-family: 'MedievalSharp', cursive;
+    }
+
+    .social a:hover {
+      color: #aaa;
+      text-shadow: 0 0 8px #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      border-top: 1px solid #333;
+      font-size: 13px;
+      color: #888;
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(4px);
+      font-family: 'MedievalSharp', cursive;
+    }
+
+    #toTop {
+      position: fixed;
+      bottom: 30px;
+      right: 25px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+      z-index: 99;
+    }
+
+    #toTop:hover {
+      background-color: #fff;
+      color: #000;
+      box-shadow: 0 0 15px #fff;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <header id="beranda">
+    <img src="https://i.ibb.co/mqHJ6Mf/goodflav-logo.jpg" alt="Logo Goodflav">
+    <h1>GOODFLAV</h1>
+  </header>
+
+  <nav>
+    <a href="#beranda">Beranda</a>
+    <a href="#produk">Produk</a>
+    <a href="#kontak">Kontak Kami</a>
+  </nav>
+  
+  <section id="beranda" class="beranda">
+    <h3><p>Selamat Datang di Goodflav</p></h3>
+    <br>
+    <p>Temukan pengalaman vaping terbaik dengan koleksi liquid vape premium kami. Dirancang untuk memenuhi selera dan gaya hidup modern, setiap tetes liquid kami dibuat dari bahan-bahan berkualitas tinggi, dengan formulasi rasa yang kaya, halus, dan memuaskan.
+    Kami menghadirkan berbagai pilihan rasa—mulai dari klasik hingga eksotis—untuk menemani setiap momen Anda.</p><br>
+
+    <p>🔸 100% food-grade ingredients</p>
+    <p>🔸 Kadar nikotin bervariasi</p>
+    <p>🔸 Aman, legal, dan bersertifikat</p><br>
+
+    <p>Pecinta vape, merapat!
+    Di sini tempatnya liquid vape dengan rasa yang nggak main-main. Mau rasa manis, creamy, atau yang nyegerin banget? Semua ada! Dibuat dari bahan premium, enak di isapan pertama sampai terakhir.</p><br>
+
+    <p>🔥 Banyak varian rasa kekinian </p>
+    <p>🔥 Cocok buat yang baru nyoba, atau yang udah pro</p>
+    <p>🔥 Kualitas top, harga tetap ramah</p><br>
+
+    <p>Vape bukan cuma soal gaya—tapi soal rasa yang pas di hati (dan di coil 😎).</p>
+  </section>
+
+  <section id="produk" class="products">
+    <div class="product">
+      <img src="https://i.ibb.co/B4bphhZ/hoodie.jpg" alt="Taro Milk Cream">
+      <h3>Taro Milk Cream</h3>
+      <p class="price">Rp 125.000</p>
+      <a href="https://wa.me/6281288872226?text=Halo%20saya%20ingin%20pesan%20Goodflav" class="buy">Beli via WA</a>
+    </div>
+
+    <div class="product">
+      <img src="https://i.ibb.co/DGGhVWF/tshirt.jpg" alt="Black Stiky Rice">
+      <h3>Black Stiky Rice</h3>
+      <p class="price">Rp 125.000</p>
+      <a href="https://wa.me/6281288872226?text=Halo%20saya%20ingin%20pesan%20Goodflav" class="buy">Beli via WA</a>
+    </div>
+
+    <div class="product">
+      <img src="https://i.ibb.co/dj7WnRZ/topi.jpg" alt="Tiramisu Cream Cake">
+      <h3>Tiramisu Cream Cake</h3>
+      <p class="price">Rp 125.000</p>
+      <a href="https://wa.me/6281288872226?text=Halo%20saya%20ingin%20pesan%20Goodflav" class="buy">Beli via WA</a>
+    </div>
+  </section>
+
+  <section id="kontak" class="contact">
+    <h6>Kami Menawarkan Layanan terbaik kepada semua pelanggan kami.
+Kami siap membantu anda untuk informasi lebih lanjut mengenai produk, layanan, kerjasama bisnis, maupun permintaan penawaran. Silahkan hubungi kami melalui Sosial media berikut.</h6>
+    <div class="social">
+      <a href="https://instagram.com/goodflav" target="_blank"><i class="fab fa-instagram"></i> @goodflav</a><br>
+      <a href="https://www.tiktok.com/@goodflav2" target="_blank"><i class="fab fa-tiktok"></i> @goodflav2</a><br><br>
+      📍 Jakarta, Indonesia
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 GOODFLAV. All Rights Reserved.</p>
+  </footer>
+
+  <div id="toTop" onclick="scrollToTop()">
+    <i class="fa-solid fa-arrow-up"></i>
+  </div>
+
+  <script>
+    const toTop = document.getElementById("toTop");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        toTop.style.display = "flex";
+      } else {
+        toTop.style.display = "none";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
